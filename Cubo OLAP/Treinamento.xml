@@ -1,0 +1,76 @@
+<Schema name="Treinemento Pentaho">
+  <Cube name="Treinemento" visible="true" cache="true" enabled="true">
+    <Table name="fato_pedidos" alias="">
+    </Table>
+    <Dimension type="StandardDimension" visible="true" foreignKey="pk_clientes" name="Cliente" description="Tabela de Clientes">
+      <Hierarchy name="Cliente" visible="true" hasAll="true" primaryKey="pk_clientes">
+        <Table name="dim_clientes" alias="">
+        </Table>
+        <Level name="Nome Cliente" visible="true" table="dim_clientes" column="NomeCliente" type="String" internalType="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+        <Level name="Pa&#237;s" visible="true" table="dim_clientes" column="Pais" type="String" internalType="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+        <Level name="Cidade" visible="true" table="dim_clientes" column="Cidade" type="String" internalType="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+        <Level name="Sexo" visible="true" table="dim_clientes" column="Sexo" type="String" internalType="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+        <Level name="NumCliente" visible="true" table="dim_clientes" column="NumeroCliente" type="Integer" internalType="int" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" visible="true" foreignKey="pk_pedido" name="Pedidos">
+      <Hierarchy name="Pedidos" visible="true" hasAll="true" primaryKey="pk_pedido">
+        <Table name="dim_pedidos" alias="">
+        </Table>
+        <Level name="Situacao" visible="true" table="dim_pedidos" column="Situacao" type="String" internalType="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+        <Level name="NumPedidos" visible="true" table="dim_pedidos" column="NumeroPedido" type="Integer" internalType="int" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" visible="true" foreignKey="pk_produtos" name="Produtos">
+      <Hierarchy name="Produtos" visible="true" hasAll="true" primaryKey="pk_produtos">
+        <Table name="dim_produtos" alias="">
+        </Table>
+        <Level name="Linha" visible="true" table="dim_produtos" column="NomeLinha" type="String" internalType="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+        <Level name="Fornecedor" visible="true" table="dim_produtos" column="NomeFornecedor" type="String" internalType="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+        <Level name="Ano" visible="true" table="dim_produtos" column="Ano Fabrica&#231;&#227;o" type="Integer" internalType="int" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+        <Level name="CodProduto" visible="true" table="dim_produtos" column="CodigoProduto" type="String" internalType="int" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+        <Level name="NomeProduto" visible="true" table="dim_produtos" column="NomeProduto" type="String" internalType="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" visible="true" foreignKey="pk_fato_pedidos" name="Calendario" description="Dimens&#227;o de datas">
+      <Hierarchy name="Calendario" visible="true" hasAll="true" primaryKey="pk_date">
+        <Table name="dim_calendario" alias="">
+        </Table>
+        <Level name="Ano" visible="true" table="dim_calendario" column="Ano" type="Integer" internalType="int" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+        <Level name="Mes" visible="true" table="dim_calendario" column="M&#234;s" type="String" internalType="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+        <Level name="Dia" visible="true" table="dim_calendario" column="Dia" type="Numeric" internalType="int" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Measure name="Quantidade" column="QuantidadePedida" datatype="Integer" aggregator="sum" visible="true">
+    </Measure>
+    <Measure name="Preco" column="PrecoUnitario" datatype="Numeric" aggregator="sum" visible="true">
+    </Measure>
+    <Measure name="ValorBruto" column="Valor" datatype="Numeric" aggregator="sum" visible="true">
+    </Measure>
+    <Measure name="ValorLiquido" column="ValorLiquido" datatype="Numeric" aggregator="sum" visible="true">
+    </Measure>
+    <Measure name="TempoEntrega" column="TempoEntrega" datatype="Integer" aggregator="sum" visible="true">
+    </Measure>
+    <Measure name="QtdPedido" column="pk_pedido" datatype="Integer" aggregator="distinct-count" visible="true">
+    </Measure>
+    <Measure name="QtdProduto" column="pk_produtos" datatype="Integer" aggregator="distinct-count" visible="true">
+    </Measure>
+    <Measure name="QtdCliente" column="pk_clientes" datatype="Integer" aggregator="sum" visible="true">
+    </Measure>
+  </Cube>
+</Schema>
